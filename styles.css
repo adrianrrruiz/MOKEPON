@@ -1,8 +1,8 @@
-.titulo {
-    color: rgb(5, 99, 25);
-    width: 312px;
-    height: 50px;
-    background-color: rgb(157, 148, 158);
+@import url('https://fonts.googleapis.com/css2?family=Poiret+One&family=Wallpoet&display=swap');
+
+body{
+    font-family: 'Poiret One', cursive;
+    background-color: #AFD3E2;
 }
 
 #seleccionar-mascota {
@@ -12,22 +12,52 @@
     align-items: center;
 }
 
+.titulo {
+    font-family: 'Wallpoet', cursive;
+    color: #F6F1F1;
+    font-size: 50PX;
+}
+
+.subtitulo {
+    color: #F6F1F1;
+    font-size: 35PX;
+}
+
+.tarjetas {
+    display: flex;
+    gap: 10px;
+}
+
 .tarjeta-de-mokepon {
-    width: 100px;
-    height: 100px;
-    background: wheat;
+    font-size: 35PX;
+    font-weight: bold;
+    width: 300px;
+    height: 200px;
+    background: #19A7CE;
     padding: 10px;
     box-sizing: border-box;
-    border: 1px solid rgb(185, 185, 37);
-    margin: 5px;
+    border: 1px solid #146C94;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tarjeta-de-mokepon img{
+    width: 80px;
+}
+
+input{
+    display: none;
 }
 
 #boton-mascota {
-    width: 265px;
-    height: 26px;
-    background: gray;
-    box-sizing: border-box;
-    padding: 1px;
-    margin: 5px;
-    border: 2px solid rgb(30, 123, 185);
+    font-family: 'Poiret One', cursive;
+    font-size: 24PX;
+    width: 400px;
+    height: 45px;
+    border-radius: 20px;
+    background: transparent;
+    border: 2px solid #146C94;
+    margin-top: 20px;
 }
