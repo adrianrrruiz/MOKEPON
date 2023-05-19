@@ -1,0 +1,33 @@
+.titulo {
+    color: rgb(5, 99, 25);
+    width: 312px;
+    height: 50px;
+    background-color: rgb(157, 148, 158);
+}
+
+#seleccionar-mascota {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+}
+
+.tarjeta-de-mokepon {
+    width: 100px;
+    height: 100px;
+    background: wheat;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid rgb(185, 185, 37);
+    margin: 5px;
+}
+
+#boton-mascota {
+    width: 265px;
+    height: 26px;
+    background: gray;
+    box-sizing: border-box;
+    padding: 1px;
+    margin: 5px;
+    border: 2px solid rgb(30, 123, 185);
+}
