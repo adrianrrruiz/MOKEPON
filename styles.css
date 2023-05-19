@@ -23,7 +23,7 @@ body{
     font-size: 35PX;
 }
 
-.tarjetas {
+.tarjetas, #botones-ataque{
     display: flex;
     gap: 10px;
 }
@@ -49,6 +49,10 @@ body{
 
 input{
     display: none;
+}
+
+input:checked + label{ /* El "+" me permite que se modifique la clase hermana (La que le sigue), al cumplir la condicón de la pseudoclase */
+    background-color: #146C94;
 }
 
 #boton-mascota {
@@ -96,7 +100,7 @@ input{
 
 #resultado{
     color: #F6F1F1;
-    font-size: 20px;
+    font-size: 30px;
 }
 
 #boton-reiniciar{
@@ -106,4 +110,55 @@ input{
     background-color: #19A7CE;
     border-radius: 20px;
     padding: 10px;
+}
+
+.ataques-jugador{
+    grid-area: jugador;
+}
+
+.ataques-enemigo{
+    grid-area: enemigo;
+}
+
+.ataques {
+    display: grid;
+    grid-template-columns: 100px 50px 100px;
+    grid-template-areas: "jugador . enemigo";
+}
+
+.ataques-jugador, .ataques-enemigo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+#vidas-jugador, #vidas-enemigo {
+    font-size: 32px;
+    margin: 20px 0px 0px 0px;
+}
+
+#mascota-jugador, #mascota-enemigo {
+    font-size: 24px;
+}
+
+
+ @media (max-width: 360px) { /*Lo que se va aplicar desde 0px hasta 360px */
+
+    .titulo{
+        font-size: 40px;
+    }
+
+    .subtitulo{
+        font-size: 30px;
+    }
+
+    .tarjetas{
+        flex-direction: column;
+    }
+
+    #botones-ataque {
+        flex-direction: column;
+        gap: 20px;
+    }
 }
