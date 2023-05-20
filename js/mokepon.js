@@ -1,9 +1,6 @@
 const sectionAtaque = document.getElementById('seleccionar-ataque')
 const sectionReiniciar = document.getElementById('boton-reiniciar')
 const botonMascotaJugador = document.getElementById('boton-mascota')
-const botonFuego = document.getElementById('boton-fuego')
-const botonAgua = document.getElementById('boton-agua')
-const botonTierra = document.getElementById('boton-tierra')
 const botonReiniciar = document.getElementById('boton-reiniciar')
 
 const sectionSeleccionarMascota = document.getElementById('seleccionar-mascota')
@@ -18,14 +15,21 @@ const sectionMensajes = document.getElementById('resultado')
 const ataquesDelJugador = document.getElementById('ataques-del-jugador')
 const ataquesDelEnemigo = document.getElementById('ataques-del-enemigo')
 const contenedorTarjetas =document.getElementById('contenedor-tarjetas')
+const contenedorBotonesAtaque = document.getElementById('botones-ataque')
 
 let mokepones = []
-let ataqueJugador
-let ataqueEnemigo
+let ataqueJugador = []
+let ataqueEnemigo = []
 let opcionDeMokepones
+let opcionDeAtaques
 let inputHipodoge
 let inputCapipepo
 let inputRatigueya
+let ataquesMokeponEnemigo
+let botonFuego 
+let botonAgua 
+let botonTierra 
+let botones = []
 let vidasJugador = 3
 let vidasEnemigo = 3
 
@@ -92,10 +96,6 @@ function iniciarJuego(){
 
     botonMascotaJugador.addEventListener('click', seleccionarMascotaJugador)
 
-    botonFuego.addEventListener('click', ataqueFuego)
-    botonAgua.addEventListener('click', ataqueAgua)
-    botonTierra.addEventListener('click', ataqueTierra)
-
     botonReiniciar.addEventListener('click', reiniciarJuego)
 }
 
@@ -103,7 +103,6 @@ function seleccionarMascotaJugador(){
     sectionSeleccionarMascota.style.display = 'none'
 
     sectionAtaque.style.display = 'flex'
-
 
     if(inputHipodoge.checked){
         spanMascota.innerHTML = inputHipodoge.id
@@ -116,39 +115,72 @@ function seleccionarMascotaJugador(){
         location.reload()
     }
 
+    extraerAtaques(spanMascota.innerHTML)
     seleccionarMascotaEnemigo()
+}
+
+function extraerAtaques(mascotaJugador){
+    let ataques
+    mokepones.forEach((mokepon) => {
+        if(mascotaJugador === mokepon.nombre){
+            ataques = mokepon.ataques
+        }
+    })
+
+    mostrarAtaques(ataques)
+}
+
+function mostrarAtaques(ataques){
+    ataques.forEach((ataque) => {
+        opcionDeAtaques = `
+        <button id=${ataque.id} class="boton-ataque BAtaque">${ataque.nombre}</button>
+        `
+        contenedorBotonesAtaque.innerHTML += opcionDeAtaques
+    })
+
+    botonFuego = document.getElementById('boton-fuego')
+    botonAgua = document.getElementById('boton-agua')
+    botonTierra = document.getElementById('boton-tierra')
+    botones = document.querySelectorAll('.BAtaque')
+}
+
+function secuenciaAtaque(){
+    botones.forEach((boton) => {
+        boton.addEventListener('click', (e) => {
+            if (e.target.textContent === '🔥'){
+                ataqueJugador.push('FUEGO')
+                boton.style.background = '#146C94'
+            }else if (e.target.textContent === '💧'){
+                ataqueJugador.push('AGUA')
+                boton.style.background = '#146C94'
+            }else {
+                ataqueJugador.push('TIERRA')
+                boton.style.background = '#146C94'
+            }
+            ataqueAleatorioEnemigo()
+        })
+    })
 }
 
 function seleccionarMascotaEnemigo(){
     let mascotaAleatorio = aleatorio(0, mokepones.length - 1)
 
     spanMascotaEnemigo.innerHTML = mokepones[mascotaAleatorio].nombre
+    ataquesMokeponEnemigo = mokepones[mascotaAleatorio].ataques
+
+    secuenciaAtaque()
 }
 
-function ataqueFuego(){
-    ataqueJugador = 'FUEGO 🔥'
-    ataqueAleatorioEnemigo()
-}
-
-function ataqueAgua(){
-    ataqueJugador = 'AGUA 💧'
-    ataqueAleatorioEnemigo()
-}
-
-function ataqueTierra(){
-    ataqueJugador = 'TIERRA 🌱'
-    ataqueAleatorioEnemigo()
-}
 
 function ataqueAleatorioEnemigo(){
-    let ataqueAleatorio = aleatorio(1,3)
+    let ataqueAleatorio = aleatorio(0, ataquesMokeponEnemigo.length - 1)
 
     if(ataqueAleatorio == 1){
-        ataqueEnemigo = 'FUEGO 🔥'
+        ataqueEnemigo.push('FUEGO')
     }else if(ataqueAleatorio == 2){
-        ataqueEnemigo = 'AGUA 💧'
+        ataqueEnemigo.push('AGUA')
     }else if(ataqueAleatorio == 3){
-        ataqueEnemigo = 'TIERRA 🌱'
+        ataqueEnemigo.push('TIERRA')
     }
 
     combate()
