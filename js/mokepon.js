@@ -175,11 +175,11 @@ function seleccionarMascotaEnemigo(){
 function ataqueAleatorioEnemigo(){
     let ataqueAleatorio = aleatorio(0, ataquesMokeponEnemigo.length - 1)
 
-    if(ataqueAleatorio == 1){
+    if(ataqueAleatorio == 0 || ataqueAleatorio == 1){
         ataqueEnemigo.push('FUEGO')
-    }else if(ataqueAleatorio == 2){
+    }else if(ataqueAleatorio == 3 || ataqueAleatorio == 4){
         ataqueEnemigo.push('AGUA')
-    }else if(ataqueAleatorio == 3){
+    }else{
         ataqueEnemigo.push('TIERRA')
     }
 
