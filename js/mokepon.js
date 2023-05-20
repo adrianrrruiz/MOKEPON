@@ -7,11 +7,8 @@ const botonTierra = document.getElementById('boton-tierra')
 const botonReiniciar = document.getElementById('boton-reiniciar')
 
 const sectionSeleccionarMascota = document.getElementById('seleccionar-mascota')
-const inputHipodoge = document.getElementById('hipodoge')
-const inputCapipepo = document.getElementById('capipepo')
-const spanMascota = document.getElementById('mascota-jugador')
-const inputRatigueya = document.getElementById('ratigueya')
 
+const spanMascota = document.getElementById('mascota-jugador')
 const spanMascotaEnemigo = document.getElementById('mascota-enemigo')
 
 const spanVidasJugador = document.getElementById('vidas-jugador')
@@ -26,6 +23,9 @@ let mokepones = []
 let ataqueJugador
 let ataqueEnemigo
 let opcionDeMokepones
+let inputHipodoge
+let inputCapipepo
+let inputRatigueya
 let vidasJugador = 3
 let vidasEnemigo = 3
 
@@ -38,7 +38,7 @@ class Mokepon{
     }
 }
 
-let hipodoge = new Mokepon('Hipodogue','./assets/hipodogue.png', 5)
+let hipodoge = new Mokepon('Hipodoge','./assets/hipodogue.png', 5)
 let capipepo = new Mokepon('Capipepo','./assets/capipepo.png', 5)
 let ratigueya = new Mokepon('Ratigueya','./assets/ratigueya.png', 5)
 
@@ -75,14 +75,20 @@ function iniciarJuego(){
 
     mokepones.forEach((mokepon) => {
         opcionDeMokepones = `
-        <input type="radio" name="mascota" id=${mokepon.nombre}>
+        <input type="radio" name="mascota" id=${mokepon.nombre} />
         <label class= "tarjeta-de-mokepon" for=${mokepon.nombre}>
             <p>${mokepon.nombre}</p>
             <img src=${mokepon.foto} alt=${mokepon.nombre}>
         </label>
         `
         contenedorTarjetas.innerHTML += opcionDeMokepones
+
+        inputHipodoge = document.getElementById('Hipodoge')
+        inputCapipepo = document.getElementById('Capipepo')
+        inputRatigueya = document.getElementById('Ratigueya')
     })
+    
+    
 
     botonMascotaJugador.addEventListener('click', seleccionarMascotaJugador)
 
@@ -100,11 +106,11 @@ function seleccionarMascotaJugador(){
 
 
     if(inputHipodoge.checked){
-        spanMascota.innerHTML = 'Hipodoge'
+        spanMascota.innerHTML = inputHipodoge.id
     }else if(inputCapipepo.checked){  
-        spanMascota.innerHTML = 'Capipepo'
+        spanMascota.innerHTML = inputCapipepo.id
     }else if(inputRatigueya.checked){
-        spanMascota.innerHTML = 'Ratigueya'
+        spanMascota.innerHTML = inputRatigueya.id
     }else{
         alert("No seleccionaste nada :(")
         location.reload()
