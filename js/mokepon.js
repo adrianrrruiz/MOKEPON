@@ -30,6 +30,8 @@ let botonFuego
 let botonAgua 
 let botonTierra 
 let botones = []
+let indexAtaqueJugador
+let indexAtaqueEnemigo
 let vidasJugador = 3
 let vidasEnemigo = 3
 
@@ -183,28 +185,42 @@ function ataqueAleatorioEnemigo(){
         ataqueEnemigo.push('TIERRA')
     }
 
-    combate()
+    iniciarPelea()
+}
+
+function iniciarPelea(){
+    if(ataqueJugador.length === 5){
+        combate()
+    }
+}
+
+function indexAmbosOponente(jugador, enemigo){
+    indexAtaqueJugador = ataqueJugador[jugador]
+    indexAtaqueEnemigo = ataqueEnemigo[enemigo]
 }
 
 function combate(){
-    if(ataqueJugador == ataqueEnemigo){
-        crearMensaje("EMPATE 😬") 
-    }else if(ataqueJugador == 'FUEGO 🔥' && ataqueEnemigo == 'TIERRA 🌱'){
-        crearMensaje("GANASTE 🥳") 
-        vidasEnemigo--
-        spanVidasEnemigo.innerHTML = vidasEnemigo
-    }else if(ataqueJugador == 'AGUA 💧' && ataqueEnemigo == 'FUEGO 🔥'){
-        crearMensaje("GANASTE 🥳") 
-        vidasEnemigo--
-        spanVidasEnemigo.innerHTML = vidasEnemigo
-    }else if(ataqueJugador == 'TIERRA 🌱' && ataqueEnemigo == 'AGUA 💧'){
-        crearMensaje("GANASTE 🥳") 
-        vidasEnemigo--
-        spanVidasEnemigo.innerHTML = vidasEnemigo
-    }else{
-        crearMensaje("PERDISTE ✖️") 
-        vidasJugador--
-        spanVidasJugador.innerHTML = vidasJugador
+    for(let i = 0; i < ataqueJugador.length; i++){
+        if(ataqueJugador[i] === ataqueEnemigo[i]){
+            indexAmbosOponente(i,i)
+            crearMensaje("EMPATE 😬") 
+        }else if(ataqueJugador[i] === 'FUEGO' && ataqueEnemigo[i] === 'TIERRA'){
+            crearMensaje("GANASTE 🥳") 
+            vidasEnemigo--
+            spanVidasEnemigo.innerHTML = vidasEnemigo
+        }else if(ataqueJugador == 'AGUA 💧' && ataqueEnemigo == 'FUEGO 🔥'){
+            crearMensaje("GANASTE 🥳") 
+            vidasEnemigo--
+            spanVidasEnemigo.innerHTML = vidasEnemigo
+        }else if(ataqueJugador == 'TIERRA 🌱' && ataqueEnemigo == 'AGUA 💧'){
+            crearMensaje("GANASTE 🥳") 
+            vidasEnemigo--
+            spanVidasEnemigo.innerHTML = vidasEnemigo
+        }else{
+            crearMensaje("PERDISTE ✖️") 
+            vidasJugador--
+            spanVidasJugador.innerHTML = vidasJugador
+        }
     }
 
     revisarVidas()
@@ -223,8 +239,8 @@ function crearMensaje(resultado){
     let nuevoAtaqueDelEnemigo = document.createElement('p')
 
     sectionMensajes.innerHTML = resultado
-    nuevoAtaqueDelJugador.innerHTML = ataqueJugador
-    nuevoAtaqueDelEnemigo.innerHTML = ataqueEnemigo
+    nuevoAtaqueDelJugador.innerHTML = indexAtaqueJugador
+    nuevoAtaqueDelEnemigo.innerHTML = indexAtaqueEnemigo
     
     ataquesDelJugador.appendChild(nuevoAtaqueDelJugador)
     ataquesDelEnemigo.appendChild(nuevoAtaqueDelEnemigo)
