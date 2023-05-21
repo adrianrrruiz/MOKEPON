@@ -78,7 +78,7 @@ input:checked + label{ /* El "+" me permite que se modifique la clase hermana (L
     font-weight: bold;
     font-family: 'Poiret One', cursive;
     font-size: 20px;
-    width: 200px;
+    width: 100px;
     background-color: #19A7CE;
     color: #F6F1F1;
     padding: 10px;
