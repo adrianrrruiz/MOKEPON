@@ -142,6 +142,16 @@ input:checked + label{ /* El "+" me permite que se modifique la clase hermana (L
     font-size: 24px;
 }
 
+#ver-mapa {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#mapa {
+    border: 2px solid white;
+}
+
 
  @media (max-width: 360px) { /*Lo que se va aplicar desde 0px hasta 360px */
 
