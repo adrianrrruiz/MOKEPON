@@ -47,25 +47,33 @@ let mapaBackground = new Image()
 mapaBackground.src = './assets/mokemap.png'
 
 class Mokepon{
-    constructor(nombre, foto, vida){
+    constructor(nombre, foto, vida, fotoMapa, x = 10, y = 10){
         this.nombre = nombre
         this.foto = foto
         this.vida = vida
         this.ataques = []
-        this.x = 20
-        this.y = 30
-        this.ancho = 80
-        this.alto = 80
+        this.x = x
+        this.y = y
+        this.ancho = 40
+        this.alto = 40
         this.mapaFoto = new Image()
-        this.mapaFoto.src = foto
+        this.mapaFoto.src = fotoMapa
         this.velocidadX = 0
         this.velocidadY = 0
     }
+
+    pintarMokepon() {
+        lienzo.drawImage(this.mapaFoto, this.x, this.y, this.ancho, this.alto)
+    }
 }
 
-let hipodoge = new Mokepon('Hipodoge','./assets/hipodogue.png', 5)
-let capipepo = new Mokepon('Capipepo','./assets/capipepo.png', 5)
-let ratigueya = new Mokepon('Ratigueya','./assets/ratigueya.png', 5)
+let hipodoge = new Mokepon('Hipodoge','./assets/hipodogue.png', 5, './assets/hipodogue2.png')
+let capipepo = new Mokepon('Capipepo','./assets/capipepo.png', 5, './assets/capipepo2.png')
+let ratigueya = new Mokepon('Ratigueya','./assets/ratigueya.png', 5, './assets/ratigueya2.png')
+
+let hipodogeEnemigo = new Mokepon('Hipodoge','./assets/hipodogue.png', 5, './assets/hipodogue2.png', 80, 120)
+let capipepoEnemigo = new Mokepon('Capipepo','./assets/capipepo.png', 5, './assets/capipepo2.png', 150, 95)
+let ratigueyaEnemigo = new Mokepon('Ratigueya','./assets/ratigueya.png', 5, './assets/ratigueya2.png', 200, 190 )
 
 hipodoge.ataques.push(
     {nombre: '💧', id: 'boton-agua'},
@@ -302,7 +310,10 @@ function pintarCanvas(){
     lienzo.drawImage(mapaBackground, 0, 0, mapa.width, mapa.height)
     mascotaJugadorObjeto.x = mascotaJugadorObjeto.x + mascotaJugadorObjeto.velocidadX
     mascotaJugadorObjeto.y = mascotaJugadorObjeto.y + mascotaJugadorObjeto.velocidadY
-    lienzo.drawImage(mascotaJugadorObjeto.mapaFoto, mascotaJugadorObjeto.x, mascotaJugadorObjeto.y, mascotaJugadorObjeto.ancho, mascotaJugadorObjeto.alto)
+    mascotaJugadorObjeto.pintarMokepon()
+    hipodogeEnemigo.pintarMokepon()
+    capipepoEnemigo.pintarMokepon()
+    ratigueyaEnemigo.pintarMokepon()
 }
 
 function moverDerecha() {
