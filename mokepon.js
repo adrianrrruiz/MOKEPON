@@ -83,6 +83,22 @@ hipodoge.ataques.push(
     {nombre: '🌱', id: 'boton-tierra'}
 )
 
+hipodogeEnemigo.ataques.push(
+    {nombre: '💧', id: 'boton-agua'},
+    {nombre: '💧', id: 'boton-agua'},
+    {nombre: '💧', id: 'boton-agua'},
+    {nombre: '🔥', id: 'boton-fuego'},
+    {nombre: '🌱', id: 'boton-tierra'}
+)
+
+capipepoEnemigo.ataques.push(
+    {nombre: '🌱', id: 'boton-tierra'},
+    {nombre: '🌱', id: 'boton-tierra'},
+    {nombre: '🌱', id: 'boton-tierra'},
+    {nombre: '🔥', id: 'boton-fuego'},
+    {nombre: '💧', id: 'boton-agua'}
+)
+
 capipepo.ataques.push(
     {nombre: '🌱', id: 'boton-tierra'},
     {nombre: '🌱', id: 'boton-tierra'},
@@ -98,6 +114,15 @@ ratigueya.ataques.push(
     {nombre: '🌱', id: 'boton-tierra'},
     {nombre: '💧', id: 'boton-agua'}
 )
+
+ratigueyaEnemigo.ataques.push(
+    {nombre: '🔥', id: 'boton-fuego'},
+    {nombre: '🔥', id: 'boton-fuego'},
+    {nombre: '🔥', id: 'boton-fuego'},
+    {nombre: '🌱', id: 'boton-tierra'},
+    {nombre: '💧', id: 'boton-agua'}
+)
+
 
 mokepones.push(hipodoge,capipepo,ratigueya)
 
@@ -132,8 +157,6 @@ function iniciarJuego(){
 function seleccionarMascotaJugador(){
     sectionSeleccionarMascota.style.display = 'none'
 
-    //sectionAtaque.style.display = 'flex'
-
     if(inputHipodoge.checked){
         spanMascota.innerHTML = inputHipodoge.id
         mascotaJugador = inputHipodoge.id
@@ -151,7 +174,6 @@ function seleccionarMascotaJugador(){
     extraerAtaques(mascotaJugador)
     sectionVerMapa.style.display = 'flex'
     iniciarMapa()
-    seleccionarMascotaEnemigo()
 }
 
 function extraerAtaques(mascotaJugador){
@@ -200,12 +222,9 @@ function secuenciaAtaque(){
     })
 }
 
-function seleccionarMascotaEnemigo(){
-    let mascotaAleatorio = aleatorio(0, mokepones.length - 1)
-
-    spanMascotaEnemigo.innerHTML = mokepones[mascotaAleatorio].nombre
-    ataquesMokeponEnemigo = mokepones[mascotaAleatorio].ataques
-
+function seleccionarMascotaEnemigo(enemigo){
+    spanMascotaEnemigo.innerHTML = enemigo.nombre
+    ataquesMokeponEnemigo = enemigo.ataques
     secuenciaAtaque()
 }
 
@@ -398,7 +417,10 @@ function revisarColision(enemigo){
     }
 
     detenerMovimiento()
-    alert("Hay colision con " + enemigo.nombre)
+    clearInterval(intervalo)
+    sectionAtaque.style.display='flex'
+    sectionVerMapa.style.display = 'none'
+    seleccionarMascotaEnemigo(enemigo)
 }
 
 
