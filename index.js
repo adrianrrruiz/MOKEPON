@@ -16,6 +16,11 @@ class Jugador {
     asignarMokepon(mokepon) {
         this.mokepon = mokepon
     }
+
+    actualizarPosicion(x,y) {
+        this.x = x
+        this.y = y
+    }
 }
 
 class Mokepon {
@@ -51,6 +56,20 @@ app.post("/mokepon/:jugadorId", (req, res) => {
     console.log(jugadorId)
     res.end()
 }) //Para definir variables en Express se pone en la URI ":"
+
+app.post("/mokepon/:jugadorId/posicion", (req,res) =>{
+    const jugadorId = req.params.jugadorId || ""
+    const x = req.body.x || ""
+    const y = req.body.y || ""
+
+    const jugadorIndex = jugadores.findIndex((jugador) => jugadorId === jugador.id)
+
+    if (jugadorIndex >= 0) {
+        jugadores[jugadorIndex].actualizarPosicion(x,y)
+    }
+
+    res.end() //Responder con un dato vacio
+})
 
 app.listen(8080, () => { //Que escuche continuamente en el puerto 8080 las peticiones de los clientes
     console.log("servidor funcionando");
