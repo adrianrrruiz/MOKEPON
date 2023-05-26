@@ -45,6 +45,18 @@ let lienzo = mapa.getContext("2d")
 let intervalo
 let mapaBackground = new Image()
 mapaBackground.src = './assets/mokemap.png'
+let alturaQueBuscamos
+let anchoDelMapa = window.innerWidth - 20 //InnerWidth nos da el ancho de la pantalla
+const anchoMaximoDelMapa = 600
+
+if(anchoDelMapa > anchoMaximoDelMapa) {
+    anchoDelMapa = anchoMaximoDelMapa - 20
+}
+
+alturaQueBuscamos = anchoDelMapa * 600 / 800
+
+mapa.width = anchoDelMapa
+mapa.height = alturaQueBuscamos
 
 class Mokepon{
     constructor(nombre, foto, vida, fotoMapa, x = 10, y = 10){
@@ -390,8 +402,6 @@ function obtenerObjetoMascota(mascota_Jugador){
 }
 
 function iniciarMapa(){
-    mapa.width = 500
-    mapa.height = 500
 
     mascotaJugadorObjeto = obtenerObjetoMascota(mascotaJugador)
     

@@ -148,11 +148,6 @@ input:checked + label{ /* El "+" me permite que se modifique la clase hermana (L
     justify-content: center;
 }
 
-#mapa {
-    border: 2px solid white;
-}
-
-
  @media (max-width: 360px) { /*Lo que se va aplicar desde 0px hasta 360px */
 
     .titulo{
