@@ -60,7 +60,8 @@ mapa.width = anchoDelMapa
 mapa.height = alturaQueBuscamos
 
 class Mokepon{
-    constructor(nombre, foto, vida, fotoMapa){
+    constructor(nombre, foto, vida, fotoMapa, id = null){
+        this.id = id
         this.nombre = nombre
         this.foto = foto
         this.vida = vida
@@ -84,58 +85,36 @@ let hipodoge = new Mokepon('Hipodoge','./assets/hipodogue.png', 5, './assets/hip
 let capipepo = new Mokepon('Capipepo','./assets/capipepo.png', 5, './assets/capipepo2.png')
 let ratigueya = new Mokepon('Ratigueya','./assets/ratigueya.png', 5, './assets/ratigueya2.png')
 
-let hipodogeEnemigo = new Mokepon('Hipodoge','./assets/hipodogue.png', 5, './assets/hipodogue2.png')
-let capipepoEnemigo = new Mokepon('Capipepo','./assets/capipepo.png', 5, './assets/capipepo2.png')
-let ratigueyaEnemigo = new Mokepon('Ratigueya','./assets/ratigueya.png', 5, './assets/ratigueya2.png')
-
-hipodoge.ataques.push(
+const HIPODOGE_ATAQUES = [
     {nombre: '💧', id: 'boton-agua'},
     {nombre: '💧', id: 'boton-agua'},
     {nombre: '💧', id: 'boton-agua'},
     {nombre: '🔥', id: 'boton-fuego'},
     {nombre: '🌱', id: 'boton-tierra'}
-)
+]
 
-hipodogeEnemigo.ataques.push(
-    {nombre: '💧', id: 'boton-agua'},
-    {nombre: '💧', id: 'boton-agua'},
-    {nombre: '💧', id: 'boton-agua'},
-    {nombre: '🔥', id: 'boton-fuego'},
-    {nombre: '🌱', id: 'boton-tierra'}
-)
+hipodoge.ataques.push(...HIPODOGE_ATAQUES)
 
-capipepoEnemigo.ataques.push(
+
+const CAPIPEPO_ATAQUES = [
     {nombre: '🌱', id: 'boton-tierra'},
     {nombre: '🌱', id: 'boton-tierra'},
     {nombre: '🌱', id: 'boton-tierra'},
     {nombre: '🔥', id: 'boton-fuego'},
     {nombre: '💧', id: 'boton-agua'}
-)
+]
 
-capipepo.ataques.push(
-    {nombre: '🌱', id: 'boton-tierra'},
-    {nombre: '🌱', id: 'boton-tierra'},
-    {nombre: '🌱', id: 'boton-tierra'},
-    {nombre: '🔥', id: 'boton-fuego'},
-    {nombre: '💧', id: 'boton-agua'}
-)
+capipepo.ataques.push(...CAPIPEPO_ATAQUES)
 
-ratigueya.ataques.push(
+const RATIGUEYA_ATAQUES = [
     {nombre: '🔥', id: 'boton-fuego'},
     {nombre: '🔥', id: 'boton-fuego'},
     {nombre: '🔥', id: 'boton-fuego'},
     {nombre: '🌱', id: 'boton-tierra'},
     {nombre: '💧', id: 'boton-agua'}
-)
+]
 
-ratigueyaEnemigo.ataques.push(
-    {nombre: '🔥', id: 'boton-fuego'},
-    {nombre: '🔥', id: 'boton-fuego'},
-    {nombre: '🔥', id: 'boton-fuego'},
-    {nombre: '🌱', id: 'boton-tierra'},
-    {nombre: '💧', id: 'boton-agua'}
-)
-
+ratigueya.ataques.push(...RATIGUEYA_ATAQUES)
 
 mokepones.push(hipodoge,capipepo,ratigueya)
 
@@ -395,6 +374,31 @@ function enviarPosicion(x, y) {
             y
         })
     })
+
+        .then(function (res) {
+            if (res.ok) {
+                res.json()
+                    .then(function ({ enemigos }) {
+                        console.log(enemigos)
+                        enemigos.forEach(function (enemigo){
+                            let mokeponEnemigo = null
+                            const mokeponNombre = enemigo.mokepon.nombre || ""
+                            if (mokeponNombre === "Hipodoge") {
+                                mokeponEnemigo = new Mokepon('Hipodoge','./assets/hipodogue.png', 5, './assets/hipodogue2.png')
+                            } else if (mokeponNombre === "Capipepo") {
+                                mokeponEnemigo = new Mokepon('Capipepo','./assets/capipepo.png', 5, './assets/capipepo2.png')
+                            } else if (mokeponNombre === "Ratigueya"){
+                                mokeponEnemigo = new Mokepon('Ratigueya','./assets/ratigueya.png', 5, './assets/ratigueya2.png')
+                            }
+
+                            mokeponEnemigo.x = enemigo.x
+                            mokeponEnemigo.y = enemigo.y
+
+                            mokeponEnemigo.pintarMokepon()
+                        })
+                    })
+            }
+        })
 }
 
 function moverDerecha() {
