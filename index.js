@@ -3,6 +3,7 @@ const cors = require("cors") //Implementando libreria cors
 
 const app = express() //Para generar una instancia del servidor
 
+app.use(express.static('public'))
 app.use(cors()) // Para terminar los errores de cors
 app.use(express.json()) //Para que soporte las peticiones JSON como parte de su cuerpo
 

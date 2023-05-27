@@ -177,6 +177,10 @@ input:checked + label{ /* El "+" me permite que se modifique la clase hermana (L
         flex-direction: column;
         gap: 20px;
     }
+
+    #ver-mapa button {
+        width: 110px;
+    }
 }
 
 @media (max-width: 300px) {
